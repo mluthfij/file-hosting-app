@@ -1,0 +1,21 @@
+<div class="p-3 bg-dark text-white rounded-bottom shadow">
+    <form id="myForm">
+      <%= search_form_for @q do |f| %>
+        <div class="input-group">
+          <%= f.text_field :name_cont, class: 'form-control', placeholder:"Search" %>
+          <%= f.submit 'Submit', class: 'btn btn-success' %>
+        </div>
+      <% end %>
+    </form>
+  <div class="row text-center">
+    <div class="col-md-4">
+        <%= sort_link(@q, :created_at, class:"fs-3 text-custom2") %>
+    </div>
+    <div class="col-md-4">
+        <%= sort_link(@q, :name, class:"fs-3 text-custom2") %>
+    </div>
+    <div class="col-md-4">
+        <%= link_to 'Reset', repos_path, class:"fs-3 text-custom2", onclick:"myFunction()" %>
+    </div>
+  </div>
+</div>

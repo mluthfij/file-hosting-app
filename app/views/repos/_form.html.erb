@@ -1,0 +1,32 @@
+<%= form_with(model: repo) do |form| %>
+  <% if repo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(repo.errors.count, "error") %> prohibited this repo from being saved:</h2>
+
+      <ul>
+        <% repo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :user_id, value: current_user.id %>
+
+  <div class="field mb-3">
+    <%= form.label :name, 'Repository name*', class:"form-label" %>
+    <%= form.text_field :name, class:"form-control"%>
+  </div>
+
+  <div class="row">
+  <div class="col text-start">
+    <%= form.submit class:"btn btn-success" %>   
+  </div>
+  <div class="col text-end">
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <%= link_to 'Show', @repo, class:"btn btn-primary" if params[:action] == "edit" %>
+      <%= link_to 'Back', repos_path, class:"btn btn-primary" %>  
+    </div>
+  </div>
+  </div>
+<% end %>

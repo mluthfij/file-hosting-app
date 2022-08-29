@@ -1,0 +1,40 @@
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <% obj.order(id: :desc).each do |repo| %>
+    <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="card-title"><%= link_to repo.name, repo, class:"text-decoration-none" %></h5>
+                <p class="card-text">
+                </p>
+              </div>
+              <div class="col text-end">
+                <% if repo.user.id == current_user.id %>
+                <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="" href="#">
+                      <%= link_to 'Edit', edit_repo_path(repo), class:"dropdown-item" %>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="" href="#">
+                      <%= link_to 'Destroy', repo, method: :delete, data: { confirm: 'Are you sure?' }, class:"dropdown-item" %>
+                    </a>
+                  </li>
+                </ul>
+                <% end %>
+              </div>
+              <small class="text-muted disabled">
+                <%= time_ago_in_words(repo.created_at) %> ago
+              </small>
+            </div>
+          </div>
+        </div>
+    </div>
+  <% end %>
+</div>
+

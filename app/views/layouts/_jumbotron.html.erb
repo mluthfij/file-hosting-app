@@ -1,0 +1,13 @@
+  <div class="p-5 bg-dark text-white rounded-bottom shadow">
+    <% if user_signed_in? %>
+      <h1>Wellcome <%= current_user.username %>!</h1> 
+    <% else %>
+      <h1>Let's save our memory</h1> 
+    <% end %>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat..</p> 
+    <% if user_signed_in? %>
+      <%= link_to 'Create new repository', new_repo_path, class:"btn btn-lg btn-primary" %>
+    <% else %>
+      <%= link_to 'Sign in?', new_user_session_path, class:"btn btn-lg btn-primary" %>
+    <% end %>
+  </div>

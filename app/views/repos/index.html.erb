@@ -1,0 +1,15 @@
+<%= render "repos/search" %>
+<div class="container">
+  <h1 class="my-4">
+    All Repositories
+  </h1>
+  <div class="my-3 mb-4">
+    <div class="d-grid gap-2">
+      <%= link_to 'New Repo', new_repo_path, class:"btn btn-success" %>
+    </div>
+  </div>
+  <%= render 'repos/repo', obj: @repos %>
+  <div class="my-2 mb-2">
+    <%= paginate @repos %>
+  </div>
+</div>

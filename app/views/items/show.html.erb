@@ -1,0 +1,61 @@
+<div class="container my-4">
+  <hr>
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
+          <li class="breadcrumb-item" aria-current="page">
+            <strong>
+              <%= link_to @repo.name, @repo, class:"text-custom2" %>
+            </strong>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col text-end">
+      <%= link_to 'Back', repos_path, class:"btn" %>
+      <%= link_to 'Delete', [@item.repo, @item], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+  <hr>
+  
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item" aria-current="page">
+        <strong>
+          <%= link_to @repo.name, @repo, class:"text-custom2" %>
+        </strong>
+      </li>
+        <% if !@item.folder.nil? %>
+          <li class="breadcrumb-item" aria-current="page"><%= link_to '...', [@repo, @item.folder], class:"text-custom2" %>
+        <% end %>
+        <% @item.posts.each do |file| %>
+          <li class="breadcrumb-item active" aria-current="page"><%= file.filename %></li>
+        <% end %>
+    </ol>
+  </nav>
+
+  <div class="card text-center">
+    <div class="card-body">
+      <% @item.posts.each do |file| %>
+        <% if file.image? %>
+          <%= image_tag(file, size: "500x500", alt: "...", class:"img-fluid") %>
+        <% elsif file.audio? %>
+          <audio controls>
+            <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
+          </audio>
+        <% elsif file.video? %>
+          <video controls style="width:100%;">
+            <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
+          </video>
+        <% else %>
+          <%= link_to file.filename, rails_blob_path(file, disposition: "file"), class:"text-custom" %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="card-footer text-muted">
+      <%= time_ago_in_words(@item.created_at) %> ago
+    </div>
+  </div>
+</div>

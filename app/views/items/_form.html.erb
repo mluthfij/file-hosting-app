@@ -1,0 +1,14 @@
+<%= form_for([@repo, @repo.items.build]) do |f| %>
+    <% if !@folder.nil? %>
+        <%= f.hidden_field :folder_id, value: @folder.id %>
+    <% end %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <p>
+        <%= f.label :posts, 'Item name*', class:"form-label" %>
+        <%= f.file_field :posts, class:"form-control", required: true %>    
+    </p>
+    <p>
+        <%= f.submit class:"btn btn-success" %>
+    </p>
+<% end %>

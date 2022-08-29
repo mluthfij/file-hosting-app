@@ -1,0 +1,14 @@
+<div class="list-group-item list-group-item-action">
+  <div class="row">
+    <div class="col">
+        <i class="bi bi-folder-fill"></i>
+        <%= link_to folder.name, [folder.repo, folder], class:"text-custom" %>
+    </div>
+    <div class="col text-center"><%= time_ago_in_words(folder.created_at) %> ago</div>
+    <div class="col text-end">
+        <%= link_to 'Delete', [folder.repo, folder], class:"text-custom2", method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>
+
+  

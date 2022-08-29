@@ -1,0 +1,24 @@
+<div class="list-group-item list-group-item-action">
+  <div class="row">
+    <div class="col">
+    <% item.posts.each do |file| %>
+        <% if file.image? %>
+            <i class="bi bi-file-earmark-image"></i>
+        <% elsif file.audio? %>
+            <i class="bi bi-file-earmark-music"></i>
+        <% elsif file.video? %>
+            <i class="bi bi-file-earmark-play"></i>
+        <% else %>
+            <i class="bi bi-file-earmark"></i>
+        <% end %>
+        <%= link_to file.filename, [item.repo, item], class:"text-custom" %>
+    <% end %>
+    </div>
+    <div class="col text-center"><%= time_ago_in_words(item.created_at) %> ago</div>
+    <div class="col text-end">
+        <%= link_to 'Delete', [item.repo, item], class:"text-custom2", method: :delete, data: { confirm: 'Are you sure?' } %>
+    </div>
+  </div>
+</div>
+
+  

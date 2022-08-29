@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row my-4">
+    <div class="col-md-5">
+      <div class="text-center">
+        <% if current_user.avatar.present? %>
+          <%= image_tag(current_user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-lg img-thumbnail rounded-circle",  alt:"Avatar") %>
+        <% else %>
+          <%= image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-lg img-thumbnail rounded-circle",  alt:"Avatar") %>
+        <% end %>
+      </div>
+      <h3 class="text-center mb-2">
+        <%= current_user.username %>
+      </h3>
+      <div class="d-grid gap-2">
+        <%= link_to "Back", profile_path(current_user), class:"btn btn-dark my-2" %>
+      </div>
+    </div>
+    <div class="col-md-7" style="padding-top:50px">
+    <h2>Edit <%= resource_name.to_s.humanize %> Profile</h2>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+            <!--Avatar Upload Field-->
+            <div class="form-group mb-3">
+              <label class="col-sm-4 col-form-label">Avatar:
+                <% if current_user.avatar.present? %><br />Current Avatar: <%= current_user.avatar.filename.to_s %><% end %>
+              </label>
+              <div class="col-sm-8"><%= f.file_field :avatar, class: "form-control" %></div>
+            </div>
+            <!--Avatar Upload Field-->
+        <div class="field mb-3">
+          <%= f.label :username, class:"form-label" %><br />
+          <%= f.text_field :username, class:"form-control", autofocus: true, autocomplete: "username" %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :email, class:"form-label" %><br />
+          <%= f.email_field :email, class:"form-control", autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+  </div>
+  <div class="my-4">
+        <div class="field mb-3">
+          <%= f.label :password, class:"form-label" %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.password_field :password, class:"form-control", autocomplete: "new-password" %>
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+        </div><br>
+
+        <div class="field mb-3">
+          <%= f.label :password_confirmation, class:"form-label" %><br />
+          <%= f.password_field :password_confirmation, class:"form-control", autocomplete: "new-password" %>
+        </div>
+
+        <div class="field mb-3">
+          <%= f.label :current_password, class:"form-label" %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, class:"form-control", autocomplete: "current-password" %>
+        </div>
+
+        <div class="actions">
+          <div class="d-grid gap-2 mb-2">
+            <%= f.submit "Update", class:"btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+
+  <div class="d-grid gap-2">
+    <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Cancel my account
+    </button>
+  </div>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class:"btn btn-danger", data: { confirm: "Are you sure?" }, method: :delete %></p>
+    </div>
+  </div>
+  </div>
+    </div>
+  </div>
+
+
+
