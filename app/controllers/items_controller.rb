@@ -1,10 +1,7 @@
 class ItemsController < ApplicationController
-<<<<<<< HEAD
   before_action :authenticate_user!
   before_action :correct_user, only: [:destroy]
 
-=======
->>>>>>> 93cc3490cd568a112547161867551c0e5d298d49
   def create
     @repo = Repo.find(params[:repo_id])
     @item = @repo.items.new(params_item)
