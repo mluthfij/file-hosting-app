@@ -1,21 +1,25 @@
 <div class="container my-4">
-  <hr>
-  <div class="row">
-    <div class="col">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
-          <li class="breadcrumb-item" aria-current="page">
-            <strong>
-              <%= link_to @repo.name, @repo, class:"text-custom2" %>
-            </strong>
-          </li>
-        </ol>
-      </nav>
-    </div>
-    <div class="col text-end">
-      <%= link_to 'Back', repos_path, class:"btn" %>
-      <%= link_to 'Delete', [@item.repo, @item], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+<hr>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
+              <li class="breadcrumb-item" aria-current="page">
+                <strong>
+                  <%= link_to @repo.name, @repo, class:"text-custom2" %>
+                </strong>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col text-end">
+          <%= link_to 'Back', repos_path, class:"btn" %>
+          <%= link_to 'Delete', [@item.repo, @item], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
     </div>
   </div>
   <hr>

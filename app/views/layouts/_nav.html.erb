@@ -7,7 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to 'Repositories', repos_path, class:"nav-link active" %>
+          <%= link_to 'Repositories', repos_path, class:"nav-link active" if user_signed_in? %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'My profile', profile_path(current_user.id), class:"nav-link active" if user_signed_in? %>
         </li>
       </ul>
       <div class="d-flex">
@@ -24,7 +27,6 @@
             <ul class="dropdown-menu dropdown-menu-lg-end">
               <li>
                 <%= link_to 'Sign out', destroy_user_session_path, class:"dropdown-item", method: :delete, data: { confirm: "Are you sure?" } %>
-                <%= link_to 'My profile', profile_path(current_user.id), class:"dropdown-item" %>
                 <%= link_to 'Edit profile', edit_user_registration_path, class:"dropdown-item" %>
               </li>
             </ul>

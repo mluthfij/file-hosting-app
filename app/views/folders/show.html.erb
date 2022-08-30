@@ -1,51 +1,56 @@
 <div class="container my-4">
 <hr>
-<div class="row">
-  <div class="col">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
-        <li class="breadcrumb-item" aria-current="page">
-          <strong>
-            <%= link_to @repo.name, @repo, class:"text-custom2" %>
-          </strong>
-        </li>
-      </ol>
-    </nav>
-  </div>
-  <div class="col text-end">
-    <%= link_to 'Back', repos_path, class:"btn" %>
-    <%= link_to 'Delete', [@folder.repo, @folder], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
+              <li class="breadcrumb-item" aria-current="page">
+                <strong>
+                  <%= link_to @repo.name, @repo, class:"text-custom2" %>
+                </strong>
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="col text-end">
+          <%= link_to 'Back', repos_path, class:"btn" %>
+          <%= link_to 'Delete', [@folder.repo, @folder], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    <% if @folder.user.id == current_user.id %>
+        <div class="accordion accordion-flush mb-2 my-2" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed bg-secondary rounded" style="--bs-bg-opacity: .5;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                <i class="bi bi-folder-plus"> </i> Add new folder
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <%= render partial: 'folders/form', locals: { repo: @folder.repo, parent: @folder } %>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed bg-secondary rounded" style="--bs-bg-opacity: .5;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                <i class="bi bi-file-earmark-plus"> </i> Add new item
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <%= render partial: 'items/form', locals: { repo: @folder.repo, folder: @folder } %>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
   </div>
 </div>
-<% if @folder.user.id == current_user.id %>
-    <div class="accordion accordion-flush mb-2 my-2" id="accordionFlushExample">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingOne">
-          <button class="accordion-button collapsed bg-secondary rounded" style="--bs-bg-opacity: .5;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-            <i class="bi bi-folder-plus"> </i> Add new folder
-          </button>
-        </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            <%= render partial: 'folders/form', locals: { repo: @folder.repo, parent: @folder } %>
-          </div>
-        </div>
-      </div>
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="flush-headingTwo">
-          <button class="accordion-button collapsed bg-secondary rounded" style="--bs-bg-opacity: .5;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-            <i class="bi bi-file-earmark-plus"> </i> Add new item
-          </button>
-        </h2>
-        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body">
-            <%= render partial: 'items/form', locals: { repo: @folder.repo, folder: @folder } %>
-          </div>
-        </div>
-      </div>
-    </div>
-<% end %>
+
 <hr>
 
 <nav aria-label="breadcrumb">

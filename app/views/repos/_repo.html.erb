@@ -29,7 +29,7 @@
                 <% end %>
               </div>
               <small class="text-muted disabled">
-                <%= time_ago_in_words(repo.created_at) %> ago
+                created by <%= repo.user.username %> <%= time_ago_in_words(repo.created_at) %> ago
               </small>
             </div>
           </div>
