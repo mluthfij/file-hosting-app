@@ -3,9 +3,11 @@
     <div class="row">
         <div class="col-md-4">
         <div class="text-center">
-            <h4 class="badge rounded-pill text-bg-warning">
-                has <%= @profile.repos.count %> repositories
-            </h4>
+        <h4 class="badge rounded-pill text-bg-warning">
+            has <%= @profile.repos.count %> repositories
+        </h4>
+        </div>
+        <div class="text-center">
         <% if current_user.avatar.present? %>
           <%= image_tag(current_user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-lg img-thumbnail rounded-circle",  alt:"Avatar") %>
         <% else %>
