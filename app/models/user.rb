@@ -18,7 +18,11 @@ class User < ApplicationRecord
               uniqueness: { case_sensitive: false }, 
               length: { maximum: 105 },
               format: { with: VALID_EMAIL_REGEX }
-  
+
+
+  validates :avatar, file_size: { less_than_or_equal_to: 5.megabytes },
+              file_content_type: { allow: ['image/jpeg', 'image/png', 'image/gif'] }
+
   attr_writer :login
   validate :validate_username
 
