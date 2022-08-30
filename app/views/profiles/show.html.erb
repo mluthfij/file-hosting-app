@@ -22,14 +22,14 @@
                 <%= @profile.email %>
             </h6>
             <div class="d-grid gap-2">
-                <%= link_to 'Edit profile', edit_user_registration_path, class:"btn btn-dark" %>
+                <%= link_to 'Edit profile', edit_user_registration_path, class:"btn btn-dark" if @profile.id == current_user.id %>
             </div>
         </div>
         </div>
         <div class="col-md-8">
         <div class="mb-3">
             <div style="min-height:400px;">
-                <%= link_to 'Create a new repository', new_repo_path, class:"btn btn-success my-2" %>
+                <%= link_to 'Create a new repository', new_repo_path, class:"btn btn-success my-2" if @profile.id == current_user.id %>
                 <%= render 'repos/repo', obj: @repos %>        
             </div>
             <%= paginate @repos %>
