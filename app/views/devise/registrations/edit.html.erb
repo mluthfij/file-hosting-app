@@ -9,7 +9,7 @@
         <div class="text-center my-2">
             <div>
               <% if current_user.avatar.present? %>
-                <%= image_tag(current_user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-lg img-thumbnail rounded-circle") %>
+                <%= image_tag(current_user.avatar.variant(resize_to_fill: [350, 350]), class: "avatar-lg img-thumbnail rounded-circle") %>
               <% else %>
                 <img src="https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png" alt="Avatar" class="avatar-lg img-thumbnail rounded-circle">
               <% end %>

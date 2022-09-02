@@ -16,7 +16,8 @@
           </nav>
         </div>
         <div class="col text-end">
-          <%= link_to 'Back', repos_path, class:"btn" %>
+          <%= link_to 'Back', :back, class:"btn" %>
+          <%= link_to 'Exit', repos_path, class:"btn" %>
           <%= link_to 'Delete', [@item.repo, @item], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } if @item.user.id == current_user.id %>
         </div>
       </div>
@@ -40,26 +41,33 @@
     </ol>
   </nav>
 
-  <div class="card text-center">
-    <div class="card-body">
+  <div class="card">
+  <div class="card-header">
+    <% if current_user.avatar.present? %>
+      <%= link_to image_tag(current_user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
+    <% else %>
+      <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
+    <% end %>
+      <%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom" %> 
+      <small class="text-muted">. <%= time_ago_in_words(@item.created_at) %> ago
+      </small>
+  </div>
+    <div class="card-body text-center">
       <% @item.posts.each do |file| %>
         <% if file.image? %>
-          <%= image_tag(file, size: "500x500", alt: "...", class:"img-fluid") %>
+          <%= image_tag(file, alt: "...", class:"card-img-top display-show") %>
         <% elsif file.audio? %>
           <audio controls>
             <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
           </audio>
         <% elsif file.video? %>
-          <video controls style="width:100%;">
+          <video controls class="card-img-top display-show" style="width:100%;">
             <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
           </video>
         <% else %>
           <%= link_to file.filename, rails_blob_path(file, disposition: "file"), class:"text-custom" %>
         <% end %>
       <% end %>
-    </div>
-    <div class="card-footer text-muted">
-      <%= time_ago_in_words(@item.created_at) %> ago
     </div>
   </div>
 </div>

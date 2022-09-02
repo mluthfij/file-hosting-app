@@ -16,7 +16,7 @@
           </nav>
         </div>
         <div class="col text-end">
-          <%= link_to 'Back', repos_path, class:"btn" %>
+          <%= link_to 'Exit', repos_path, class:"btn" %>
           <%= link_to 'Destroy', @repo, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" if @repo.user.id == current_user.id %>
         </div>
       </div>
@@ -53,11 +53,10 @@
   </div>
   <hr>
 
-
   <div class="list-group mb-4">
     <div class="list-group-item list-group-item-dark">
         <% if current_user.avatar.present? %>
-          <%= image_tag(current_user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm img-thumbnail rounded-circle",  alt:"Avatar") %>
+          <%= link_to image_tag(current_user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
         <% else %>
           <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
         <% end %>
