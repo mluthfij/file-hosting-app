@@ -1,0 +1,13 @@
+[
+    {
+      "origin": ["http://localhost:3000", "https://storage.googleapis.com/file-hosting-rails/op6rshflja39r066faknmk4v6bii?GoogleAccessId=file-hosting%40filehosting-359915.iam.gserviceaccount.com&Expires=1662088658&Signature=dFZM0b5QKlvcNOZeONvonUjYW2xdla8fJzj7dPoWHxnB%2BF82xZv9OqgiL7GE0ggpMxuMGrrkomkM37ABv5qyLvghGqqyWabrAtVECbkja0d6SA2wr7SIwnifA2Nchg4jyDdgDOsuUsU0RomiDrOPN%2BjMPzvbZHLY93xdwPsLqm35YvSfQ%2F64SX2v%2F4H%2BWgTdMPZSa73YJwVzgcPoEWiUda4y0o2m1QvG018PusrQtMkIDnG5cF2sL1ceeMxLAp117LLOQf8drVdAAbefu1nsuubUtirgVytT83r%2BoNKtOk%2B%2FSKHT47IvPUewuMYJ%2F1GoU%2Fds0YhCqAVGgJyOPmHrRQ%3D%3D"],
+      "responseHeader": [
+        "Origin",
+        "Content-Type",
+        "Content-MD5",
+        "Content-Disposition"
+    ],
+      "method": ["PUT", "GET", "HEAD", "DELETE"],
+      "maxAgeSeconds": 3600
+    }
+]

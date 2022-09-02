@@ -6,7 +6,7 @@
 
     <p>
         <%= f.label :posts, 'Item name*', class:"form-label" %>
-        <%= f.file_field :posts, class:"form-control", required: true %>    
+        <%= f.file_field :posts, class:"form-control", required: true, direct_upload: true %>    
     </p>
     <p>
         <%= f.submit 'Add item', class:"btn btn-success" %>

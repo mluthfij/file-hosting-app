@@ -12,3 +12,5 @@ import "bootstrap"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import "direct_uploads"
