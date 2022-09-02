@@ -8,8 +8,8 @@
         </h4>
         </div>
         <div class="text-center">
-        <% if current_user.avatar.present? %>
-          <%= image_tag(current_user.avatar.variant(resize_to_fill: [350, 350]), class: "avatar-lg img-thumbnail rounded-circle",  alt:"Avatar") %>
+        <% if @profile.avatar.present? %>
+          <%= image_tag(@profile.avatar.variant(resize_to_fill: [350, 350]), class: "avatar-lg img-thumbnail rounded-circle",  alt:"Avatar") %>
         <% else %>
             <%= image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-lg img-thumbnail rounded-circle",  alt:"Avatar") %>
         <% end %>
