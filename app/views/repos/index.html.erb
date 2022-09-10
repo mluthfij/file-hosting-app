@@ -2,9 +2,11 @@
 <div class="container">
   <div class="top" style="min-height:400px;">
     <h1 class="my-4 text-white">
-      All Repositories
+      Public Repositories
     </h1>
-    <%= render 'repos/repo', obj: @repos %>
+
+    <%= render 'repos/repo', obj: @repos.where(private_role: false) %>
+    
   </div>
   <div class="my-2 mb-2">
     <%= paginate @repos %>

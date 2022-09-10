@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_10_035939) do
+ActiveRecord::Schema.define(version: 2022_09_10_081626) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2022_09_10_035939) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.string "slug"
+    t.boolean "private_role", default: false
     t.index ["slug"], name: "index_repos_on_slug", unique: true
     t.index ["user_id"], name: "index_repos_on_user_id"
   end

@@ -5,7 +5,14 @@
           <div class="card-body">
             <div class="row">
               <div class="col">
-                <h5 class="card-title"><%= link_to repo.name, repo, class:"text-decoration-none" %></h5>
+                <% if repo.private_role == true %>
+                  <span class="badge text-bg-danger">Private</span> <i class="bi bi-lock-fill"></i>
+                <% elsif repo.private_role == false %>
+                  <span class="badge text-bg-warning">Public</span> <% if params[:action] == 'show' %><i class="bi bi-unlock-fill"></i><% end %>
+                <% end %>
+                <h5 class="card-title">
+                  <%= link_to repo.name, repo, class:"text-decoration-none" %>
+                </h5>
                 <p class="card-text">
                 </p>
               </div>
@@ -31,6 +38,11 @@
               <small class="text-muted disabled">
                 created by <%= repo.user.username %> <%= time_ago_in_words(repo.created_at) %> ago
               </small>
+              <% if params[:action] == 'show' %>
+                <% if current_user.id == repo.user.id %>
+                  <%= link_to repo.private_role == true ? "Private" : "Public", private_fiture_path(repo), method: :patch, class:repo.private_role == true ? "btn btn-danger" : "btn btn-warning" %>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

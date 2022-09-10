@@ -32,7 +32,9 @@
                     <%= link_to 'Create a new repository', new_repo_path, class:"btn btn-success my-2" if @profile.id == current_user.id %>
                     <%= render 'repos/repo', obj: @repos %>        
                 </div>
-                <%= paginate @repos %>
+                <div class="my-2">
+                    <%= paginate @repos %>
+                </div>
             </div>
         </div>
     </div>
