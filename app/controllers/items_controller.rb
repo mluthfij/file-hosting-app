@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   before_action :show_public, only: [:show]
   before_action :set_params, only: [:create, :destroy, :show]
+  # before_action :set_params, only: [:create, :destroy, :show]
 
   def create
     @item = @repo.items.new(params_item)
@@ -34,12 +35,12 @@ class ItemsController < ApplicationController
     @item = @repo.items.find(params[:id])
   end
 
-  private
   def show_public
     @repo = Repo.find(params[:repo_id])
     redirect_to repos_path, notice: "This repo is private!" if @repo.private_role == true unless current_user.id == @repo.user_id
   end
   
+  private
   def correct_user
     @item = current_user.items.find_by(id: params[:id])
     redirect_to request.referrer, notice: "Not authorized to edit this item" if @item.nil?

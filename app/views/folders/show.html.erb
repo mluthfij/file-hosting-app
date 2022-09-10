@@ -1,4 +1,5 @@
-<div class="container my-4" style="min-height:400px;">
+<div class="container my-4">
+<div style="min-height:400px;">
 <hr>
   <div class="card">
     <div class="card-body">
@@ -90,5 +91,6 @@
     <%= render @folder.folders.where(parent_id: @folder).order(id: :desc) %>
     <%= render @repo.items.where(folder_id: @folder).order(id: :desc) %>
   </div>
+</div>
 </div>
 </div>
