@@ -1,9 +1,11 @@
 <%= render "repos/search" %>
 <div class="container">
-  <h1 class="my-4">
-    All Repositories
-  </h1>
-  <%= render 'repos/repo', obj: @repos %>
+  <div class="top" style="min-height:400px;">
+    <h1 class="my-4 text-white">
+      All Repositories
+    </h1>
+    <%= render 'repos/repo', obj: @repos %>
+  </div>
   <div class="my-2 mb-2">
     <%= paginate @repos %>
   </div>

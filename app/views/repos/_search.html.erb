@@ -8,13 +8,13 @@
       <% end %>
     </form>
   <div class="row text-center">
-    <div class="col-md-4">
+    <div class="col-4">
         <%= sort_link(@q, :created_at, class:"fs-3 text-custom2") %>
     </div>
-    <div class="col-md-4">
+    <div class="col-4">
         <%= sort_link(@q, :name, class:"fs-3 text-custom2") %>
     </div>
-    <div class="col-md-4">
+    <div class="col-4">
         <%= link_to 'Reset', repos_path, class:"fs-3 text-custom2", onclick:"myFunction()" %>
     </div>
   </div>

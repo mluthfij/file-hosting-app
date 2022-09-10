@@ -9,7 +9,7 @@
 -%>
 <% if page.current? %>
 <li class="page-item page<%= ' current' if page.current? %>">
-  <a class="page-link disabled bg-primary bg-opacity-25">
+  <a class="page-link disabled bg-primary text-white bg-opacity-25">
   <%= link_to_unless page.current?, page, url, {remote: remote, rel: page.rel} %>
   </a>
 </li>

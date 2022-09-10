@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container my-4" style="min-height:400px;">
 <hr>
   <div class="card">
     <div class="card-body">
@@ -25,21 +25,23 @@
   </div>
   <hr>
   
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item" aria-current="page">
-        <strong>
-          <%= link_to @repo.name, @repo, class:"text-custom2" %>
-        </strong>
-      </li>
-        <% if !@item.folder.nil? %>
-          <li class="breadcrumb-item" aria-current="page"><%= link_to '...', [@repo, @item.folder], class:"text-custom2" %>
-        <% end %>
-        <% @item.posts.each do |file| %>
-          <li class="breadcrumb-item active" aria-current="page"><%= file.filename %></li>
-        <% end %>
-    </ol>
-  </nav>
+  <div class="rounded text-bg-light mb-1 pe-3 ps-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" aria-current="page">
+          <strong>
+            <%= link_to @repo.name, @repo, class:"text-custom2" %>
+          </strong>
+        </li>
+          <% if !@item.folder.nil? %>
+            <li class="breadcrumb-item" aria-current="page"><%= link_to '...', [@repo, @item.folder], class:"text-custom2" %>
+          <% end %>
+          <% @item.posts.each do |file| %>
+            <li class="breadcrumb-item active" aria-current="page"><%= file.filename %></li>
+          <% end %>
+      </ol>
+    </nav>
+  </div>
 
   <div class="card">
   <div class="card-header">
