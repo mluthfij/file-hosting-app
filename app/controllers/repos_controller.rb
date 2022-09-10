@@ -63,17 +63,20 @@ class ReposController < ApplicationController
 
   private
     def correct_user
-      @repo = current_user.repos.find_by(id: params[:id])
+      # @repo = current_user.repos.find_by(id: params[:id])
+      # @repo = current_user.repos.find_by_id(params[:id])
+      @repo = current_user.repos.find_by_slug(params[:id])
       redirect_to repos_path, notice: "Not authorized to edit this repo" if @repo.nil?
     end
     
     # Use callbacks to share common setup or constraints between actions.
     def set_repo
       @repo = Repo.find(params[:id])
+      # @repo = Repo.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def repo_params
-      params.require(:repo).permit(:name, :user_id)
+      params.require(:repo).permit(:name, :user_id, :slug)
     end
 end

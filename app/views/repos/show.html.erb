@@ -6,7 +6,7 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
+              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom2" %></a></li>
               <li class="breadcrumb-item" aria-current="page">
                 <strong>
                   <%= link_to @repo.name, @repo, class:"text-custom2" %>
@@ -56,11 +56,11 @@
   <div class="list-group mb-4">
     <div class="list-group-item list-group-item-dark">
         <% if @repo.user.avatar.present? %>
-          <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
+          <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
         <% else %>
-          <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
+          <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
         <% end %>
-      <%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom" %>
+      <%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom" %>
       <span class="badge rounded-pill text-bg-warning">
         Has <%= @repo.folders.count + @repo.items.count %> Items
       </span>

@@ -6,7 +6,7 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom2" %></a></li>
+              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom2" %></a></li>
               <li class="breadcrumb-item" aria-current="page">
                 <strong>
                   <%= link_to @repo.name, @repo, class:"text-custom2" %>
@@ -44,18 +44,18 @@
   <div class="card">
   <div class="card-header">
     <% if @repo.user.avatar.present? %>
-      <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
+      <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_params) %>
     <% else %>
-      <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.id) %>
+      <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
     <% end %>
-      <%= link_to @repo.user.username, profile_path(@repo.user.id), class:"text-custom" %> 
+      <%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom" %> 
       <small class="text-muted">. <%= time_ago_in_words(@item.created_at) %> ago
       </small>
   </div>
     <div class="card-body text-center">
       <% @item.posts.each do |file| %>
         <% if file.image? %>
-          <%= image_tag(file, alt: "...", class:"card-img-top display-show") %>
+          <%= link_to image_tag(file, alt: "...", class:"card-img-top display-show"), rails_blob_path(file, disposition: 'preview') %>
         <% elsif file.audio? %>
           <audio controls>
             <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>

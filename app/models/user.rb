@@ -45,4 +45,14 @@ class User < ApplicationRecord
       errors.add(:username, :invalid)
     end
   end
+  # 
+  
+
+  extend FriendlyId 
+  friendly_id :username, use: [:slugged, :finders]
+
+    def should_generate_new_friendly_id?
+        username_changed? || new_record? || slug.nil? || slug.blank?
+    end
+  # 
 end

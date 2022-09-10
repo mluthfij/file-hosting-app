@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_29_131832) do
+ActiveRecord::Schema.define(version: 2022_09_10_035939) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -47,8 +47,21 @@ ActiveRecord::Schema.define(version: 2022_08_29_131832) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_id"
     t.integer "user_id"
+    t.string "slug"
     t.index ["repo_id"], name: "index_folders_on_repo_id"
+    t.index ["slug"], name: "index_folders_on_slug", unique: true
     t.index ["user_id"], name: "index_folders_on_user_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -57,7 +70,9 @@ ActiveRecord::Schema.define(version: 2022_08_29_131832) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "folder_id"
     t.integer "user_id"
+    t.string "slug"
     t.index ["repo_id"], name: "index_items_on_repo_id"
+    t.index ["slug"], name: "index_items_on_slug", unique: true
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -66,6 +81,8 @@ ActiveRecord::Schema.define(version: 2022_08_29_131832) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.string "slug"
+    t.index ["slug"], name: "index_repos_on_slug", unique: true
     t.index ["user_id"], name: "index_repos_on_user_id"
   end
 
@@ -78,8 +95,10 @@ ActiveRecord::Schema.define(version: 2022_08_29_131832) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
