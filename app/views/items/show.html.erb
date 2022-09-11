@@ -47,7 +47,7 @@
   <div class="card">
   <div class="card-header">
     <% if @repo.user.avatar.present? %>
-      <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_params) %>
+      <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
     <% else %>
       <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
     <% end %>
