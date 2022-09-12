@@ -1,77 +1,82 @@
 <div class="container my-4">
-<div style="min-height:400px;">
-<hr>
-  <div class="card">
-    <div class="card-body">
-      <div class="row">
-        <div class="col">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom2" %></a></li>
-              <li class="breadcrumb-item" aria-current="page">
-                <strong>
-                  <%= link_to @repo.name, @repo, class:"text-custom2" %>
-                </strong>
-              </li>
-            </ol>
-          </nav>
-        </div>
-        <div class="col text-end">
-          <%= link_to 'Back', :back, class:"btn" %>
-          <%= link_to 'Exit', repos_path, class:"btn" %>
-          <%= link_to 'Delete', [@item.repo, @item], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } if @item.user.id == current_user.id %>
+  <div style="min-height:400px;">
+  <hr>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a><%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom2" %></a></li>
+                <li class="breadcrumb-item" aria-current="page">
+                  <strong>
+                    <%= link_to @repo.name, @repo, class:"text-custom2" %>
+                  </strong>
+                </li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col text-end">
+            <%= link_to 'Back', :back, class:"btn" %>
+            <%= link_to 'Exit', repos_path, class:"btn" %>
+            <%= link_to 'Delete', [@item.repo, @item], class:'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } if @item.user.id == current_user.id %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <hr>
-  
-  <div class="rounded text-bg-light mb-1 pe-3 ps-3">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">
-          <strong>
-            <%= link_to @repo.name, @repo, class:"text-custom2" %>
-          </strong>
-        </li>
-          <% if !@item.folder.nil? %>
-            <li class="breadcrumb-item" aria-current="page"><%= link_to '...', [@repo, @item.folder], class:"text-custom2" %>
-          <% end %>
-          <% @item.posts.each do |file| %>
-            <li class="breadcrumb-item active" aria-current="page"><%= file.filename %></li>
-          <% end %>
-      </ol>
-    </nav>
-  </div>
+    <hr>
+    
+    <div class="rounded text-bg-light mb-1 pe-3 ps-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" aria-current="page">
+            <strong>
+              <%= link_to @repo.name, @repo, class:"text-custom2" %>
+            </strong>
+          </li>
+            <% if !@item.folder.nil? %>
+              <li class="breadcrumb-item" aria-current="page"><%= link_to '...', [@repo, @item.folder], class:"text-custom2" %>
+            <% end %>
+            <% @item.posts.each do |file| %>
+              <li class="breadcrumb-item active" aria-current="page"><%= file.filename %></li>
+            <% end %>
+        </ol>
+      </nav>
+    </div>
 
-  <div class="card">
-  <div class="card-header">
-    <% if @repo.user.avatar.present? %>
-      <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
-    <% else %>
-      <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
-    <% end %>
-      <%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom" %> 
-      <small class="text-muted">. <%= time_ago_in_words(@item.created_at) %> ago
-      </small>
-  </div>
-    <div class="card-body text-center">
-      <% @item.posts.each do |file| %>
-        <% if file.image? %>
-          <%= link_to image_tag(file, alt: "...", class:"card-img-top display-show"), rails_blob_path(file, disposition: 'preview') %>
-        <% elsif file.audio? %>
-          <audio controls>
-            <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
-          </audio>
-        <% elsif file.video? %>
-          <video controls class="card-img-top display-show" style="width:100%;">
-            <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
-          </video>
-        <% else %>
-          <%= link_to file.filename, rails_blob_path(file, disposition: "file"), class:"text-custom" %>
-        <% end %>
+    <div class="card">
+    <div class="card-header">
+      <% if @repo.user.avatar.present? %>
+        <%= link_to image_tag(@repo.user.avatar.variant(resize_to_fill: [150, 150]), class: "avatar-sm rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
+      <% else %>
+        <%= link_to image_tag("https://png.pngtree.com/png-vector/20220608/ourmid/pngtree-user-mysterious-anonymous-account-vector-png-image_4816288.png", class:"avatar-sm img-thumbnail rounded-circle",  alt:"Avatar"), profile_path(@repo.user.to_param) %>
       <% end %>
+        <%= link_to @repo.user.username, profile_path(@repo.user.to_param), class:"text-custom" %> 
+        <small class="text-muted">. <%= time_ago_in_words(@item.created_at) %> ago
+        </small>
+    </div>
+      <div class="card-body text-center">
+        <% @item.posts.each do |file| %>
+          <% if file.image? %>
+            <%= link_to image_tag(file, alt: "...", class:"card-img-top display-show"), rails_blob_path(file, disposition: 'preview') %>
+          <% elsif file.audio? %>
+            <audio controls>
+              <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
+            </audio>
+          <% elsif file.video? %>
+            <video controls class="card-img-top display-show" style="width:100%;">
+              <source src="<%= rails_blob_url(file) %>" type="<%= file.content_type %>"/>
+            </video>
+          <% else %>
+            <% if file.content_type == 'application/pdf' %>
+              <embed src="<%= rails_blob_path(file, disposition: "file") %>" type="<%= file.content_type %>" style="width:100%; height:500px;">
+              <br>Download: <%= link_to file.filename, rails_blob_path(file, disposition: "file"), class:"text-custom" %>
+            <% else %>
+              Download: <%= link_to file.filename, rails_blob_path(file, disposition: "file"), class:"text-custom" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
 </div>
