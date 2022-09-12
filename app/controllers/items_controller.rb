@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
   before_action :correct_user, only: [:destroy]
   before_action :show_public, only: [:show]
   before_action :set_params, only: [:create, :destroy, :show]
-  # before_action :set_params, only: [:create, :destroy, :show]
 
   def create
     @item = @repo.items.new(params_item)
