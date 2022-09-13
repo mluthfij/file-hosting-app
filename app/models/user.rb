@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   before_save { self.username = username.downcase }
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :timeoutable
 
   has_many :folders, dependent: :destroy
   has_many :items, dependent: :destroy
@@ -45,14 +46,17 @@ class User < ApplicationRecord
       errors.add(:username, :invalid)
     end
   end
-  # 
-  
 
   extend FriendlyId 
   friendly_id :username, use: [:slugged, :finders]
 
-    def should_generate_new_friendly_id?
-        username_changed? || new_record? || slug.nil? || slug.blank?
-    end
-  # 
+  def should_generate_new_friendly_id?
+    username_changed? || new_record? || slug.nil? || slug.blank?
+  end
+
+  def timeout_in
+    # return 1.year if admin?
+    # 5.seconds
+    1.days
+  end
 end

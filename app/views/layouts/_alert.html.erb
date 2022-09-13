@@ -1,7 +1,11 @@
 <% flash.each do |name, msg| %>
 <div class="position-relative alert-message">
     <div class="position-absolute top-50 start-50 translate-middle mt-3 w-50">
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <% if notice %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <% elsif alert %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <% end %>
         <%# <p class="notice"><%= notice %>
         <%# <p class="alert"><%= alert %>
           <%= msg %>

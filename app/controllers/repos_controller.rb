@@ -85,7 +85,7 @@ class ReposController < ApplicationController
     
     # Use callbacks to share common setup or constraints between actions.
     def set_repo
-      @repo = Repo.find(params[:id])
+      @repo = Repo.find(params[:id]) rescue not_found
       # @repo = Repo.friendly.find(params[:id])
     end
 

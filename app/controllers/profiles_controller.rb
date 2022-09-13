@@ -8,6 +8,6 @@ class ProfilesController < ApplicationController
 
   private
   def set_profile
-    @profile = User.find(params[:id])    
+    @profile = User.find(params[:id]) rescue not_found  
   end
 end

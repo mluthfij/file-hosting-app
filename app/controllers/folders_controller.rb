@@ -18,7 +18,7 @@ class FoldersController < ApplicationController
   def destroy
     @folder = @repo.folders.find(params[:id])
     if @folder.destroy
-      flash[:notice] = 'Item destroyed.'
+      flash[:notice] = 'Folder destroyed.'
       if @folder.repo.nil?
         redirect_to request.referrer
       else
@@ -31,7 +31,7 @@ class FoldersController < ApplicationController
   end
 
   def show
-    @folder = @repo.folders.find(params[:id])
+    @folder = @repo.folders.find(params[:id]) rescue not_found
   end
 
   def show_public
@@ -41,14 +41,14 @@ class FoldersController < ApplicationController
 
   private
   def correct_user
+    @repo = Repo.find(params[:repo_id])
     @folder = current_user.folders.find_by(id: params[:id])
-    redirect_to request.referrer, notice: "Not authorized to edit this folder" if @folder.nil?
+    redirect_to request.referrer, notice: "Not authorized to edit this folder" if @folder.nil? unless current_user.id == @repo.user_id
   end
 
   def set_params
     @repo = Repo.find(params[:repo_id])
   end
-  
   
   def params_folder
     params[:folder].permit(:name, :parent_id, :user_id)

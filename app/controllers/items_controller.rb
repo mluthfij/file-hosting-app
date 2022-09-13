@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = @repo.items.find(params[:id])
+    @item = @repo.items.find(params[:id]) rescue not_found
   end
 
   def show_public
@@ -41,8 +41,9 @@ class ItemsController < ApplicationController
   
   private
   def correct_user
+    @repo = Repo.find(params[:repo_id])
     @item = current_user.items.find_by(id: params[:id])
-    redirect_to request.referrer, notice: "Not authorized to edit this item" if @item.nil?
+    redirect_to request.referrer, notice: "Not authorized to edit this item" if @item.nil? unless current_user.id == @repo.user_id
   end
 
   def set_params
